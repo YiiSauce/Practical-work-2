@@ -1,0 +1,32 @@
+<div class="list row">
+    <div class="col-md-6">
+        <h4>Trainees List</h4>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+
+    <ul class="list-group mt-5 text-white">
+        @for (t of trainees(); track t.id) {
+        <li class="list-group-item d-flex justify-content-between align-content-center"
+            [ngClass]="{'active': t.id === selectedTrainee()}"
+            (click)="onSelected(t.id)">
+            <div class="d-flex flex-row">
+                <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                <div class="ml-2">
+                    <h6 class="mb-0">{{ t.traineeName }}</h6>
+                    <div class="about">
+                        <span>Id N° : {{ t.id}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check">
+                <button class="m-1 btn btn-sm btn-warning" (click)="update(t)">Update</button>
+                <button class="m-1 btn btn-sm btn-danger" (click)="remove(t.id)">Delete</button>
+            </div>
+        </li>
+        }
+    </ul>
+
+</div>
