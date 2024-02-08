@@ -16,7 +16,6 @@ export class TraineeDetailsComponent {
     
   }
 
-  //formData: Trainee={id:0,traineeName:"",age:0,isWorking:false};
   onSubmit(form: NgForm) {
     this.service.formSubmitted=true;
     if (form.valid) {      
