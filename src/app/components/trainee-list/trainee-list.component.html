@@ -3,9 +3,13 @@
         <h4>Trainees List</h4>
     </div>
 </div>
+<div class="row mt-5">
+    <div class="col-6">
+        <app-trainee-details/>
+    <button class="m-1 btn btn-sm btn-success" (click)="add()">Add</button>
+    </div>
 
-<div class="container d-flex justify-content-center">
-
+<div class="container d-flex justify-content-center col-6">
     <ul class="list-group mt-5 text-white">
         @for (t of trainees(); track t.id) {
         <li class="list-group-item d-flex justify-content-between align-content-center"
@@ -29,8 +33,6 @@
             </div>
         </li>
     }
-    
-    <button class="m-1 btn btn-sm btn-success" (click)="add()">Add</button>
     </ul>
-
+</div>
 </div>

@@ -2,11 +2,12 @@ import { Component, computed } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { NgClass, NgFor } from '@angular/common';
 import { Trainee } from '../../models/trainee';
+import { TraineeDetailsComponent } from '../trainee-details/trainee-details.component';
 
 @Component({
   selector: 'app-trainee-list',
   standalone: true,
-  imports: [NgFor, NgClass],
+  imports: [NgFor, NgClass, TraineeDetailsComponent],
   templateUrl: './trainee-list.component.html',
   styleUrl: './trainee-list.component.css'
 })
@@ -32,7 +33,7 @@ export class TraineeListComponent {
   });
  
   remove(id:number){
-    this.traineeService.deleteBenefit(id);
+    this.traineeService.deleteTrainee(id);
   }
   update(trainee: Trainee){
     console.log("I am returning to it !");

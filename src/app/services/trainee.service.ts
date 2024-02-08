@@ -10,6 +10,8 @@ export class TraineeService {
 
   private trainees$ = this.http.get<Trainee[]>(`${environment.apiUrl}/Trainees`);
   trainees : WritableSignal<Trainee[]> = signal([]);
+  formSubmitted:boolean = false;
+
   constructor(private http: HttpClient) { 
     this.trainees$.subscribe((t) =>{
       this.trainees.set(t);
@@ -23,17 +25,17 @@ export class TraineeService {
       });
   }
 
-  deleteBenefit(benefitId: number): void {
-    this.http.delete<void>(`${environment.apiUrl}/Trainees/${benefitId}`)
+  deleteTrainee(traineeId: number): void {
+    this.http.delete<void>(`${environment.apiUrl}/Trainees/${traineeId}`)
       .subscribe(() => {
-        this.trainees.set(this.trainees().filter(benefit => benefit.id !== benefitId));
+        this.trainees.set(this.trainees().filter(trainee => trainee.id !== traineeId));
       });
   }
 
-  updateBenefit(updatedBenefit: Trainee): void {
-    this.http.put<Trainee>(`${environment.apiUrl}/Trainees/${updatedBenefit.id}`, updatedBenefit)
+  updateTrainee(updatedTrainee: Trainee): void {
+    this.http.put<Trainee>(`${environment.apiUrl}/Trainees/${updatedTrainee.id}`, updatedTrainee)
       .subscribe(() => {
-        this.trainees.set(this.trainees().map(benefit => (benefit.id === updatedBenefit.id) ? updatedBenefit : benefit));
+        this.trainees.set(this.trainees().map(trainee => (trainee.id === updatedTrainee.id) ? updatedTrainee : trainee));
       });
   }
 
