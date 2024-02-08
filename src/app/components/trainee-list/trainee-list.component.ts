@@ -18,11 +18,6 @@ export class TraineeListComponent {
   constructor(private traineeService:TraineeService){
     console.log(this.traineeService.trainees())
   }
-  selectedTrainee = this.traineeService.selectedTrainee;
-  onSelected(id:number){
-    this.traineeService.setSelectedTrainee(id);
-  }
-
   trainees = computed(() => {
     try{
       return this.traineeService.trainees();
@@ -31,14 +26,13 @@ export class TraineeListComponent {
       return[];
     }
   });
+
  
   remove(id:number){
     this.traineeService.deleteTrainee(id);
   }
+
   update(trainee: Trainee){
-    console.log("I am returning to it !");
-  }
-  add(){
-    console.log("I am returning to it !");
+    this.traineeService.t.set(trainee);
   }
 }

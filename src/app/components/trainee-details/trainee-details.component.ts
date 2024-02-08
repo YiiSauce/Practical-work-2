@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { Trainee } from '../../models/trainee';
 import { FormsModule, NgForm } from '@angular/forms';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-trainee-details',
@@ -12,25 +13,28 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class TraineeDetailsComponent {
   constructor(public service: TraineeService) {
+    
   }
 
-  formData: Trainee={id:0,traineeName:"",age:0,isWorking:false};
+  //formData: Trainee={id:0,traineeName:"",age:0,isWorking:false};
   onSubmit(form: NgForm) {
     this.service.formSubmitted=true;
-    if (form.valid) {
-      if(this.formData.id == 0)
-        this.insertItem(this.formData);
-      else
-      this.updateItem(form);
-    // form.reset();
-  }
-  console.log(this.formData)
+    if (form.valid) {      
+      if(this.service.t().id == 0){
+        this.insertItem(this.service.t());
+        this.service.resetForm(form);
+      }
+      else{
+        this.updateItem(this.service.t());
+        this.service.resetForm(form);
+      }
+    }
 }
 insertItem(form: Trainee){
   this.service.addTrainee(form);
-  // this.toastr.success("Inserted Successfuly !", "Payment Detail Register");
 }
-updateItem(form: NgForm){
+updateItem(form: Trainee){
+  this.service.updateTrainee(form);
+  this.service.t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
 }
-
 }

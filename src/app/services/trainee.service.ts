@@ -2,6 +2,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Trainee } from '../models/trainee';
 import { environment } from '../../environments/environment.development';
+import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class TraineeService {
   private trainees$ = this.http.get<Trainee[]>(`${environment.apiUrl}/Trainees`);
   trainees : WritableSignal<Trainee[]> = signal([]);
   formSubmitted:boolean = false;
+  t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
 
   constructor(private http: HttpClient) { 
     this.trainees$.subscribe((t) =>{
@@ -38,11 +40,11 @@ export class TraineeService {
         this.trainees.set(this.trainees().map(trainee => (trainee.id === updatedTrainee.id) ? updatedTrainee : trainee));
       });
   }
-
-  selectedTrainee = signal(0);
-  setSelectedTrainee(id : number){
-    this.selectedTrainee.set(id);
-  }
   
+  resetForm(form: NgForm){
+    form.form.reset();
+    this.formSubmitted = false;
+  }
+
 }
 

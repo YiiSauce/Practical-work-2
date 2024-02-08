@@ -1,42 +1,22 @@
-<!-- <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="formData.traineeName" required>
-    </div>
-    <div class="form-group">
-      <label for="age">Age:</label>
-      <input type="number" class="form-control" id="age" name="age" [(ngModel)]="formData.age" required>
-    </div>
-    <div class="form-group">
-      <label for="role">working:</label>
-      <select class="form-control" id="role" name="role" [(ngModel)]="formData.isWorking" required>
-        <option value="" disabled selected>Select a role</option>
-        <option value="false">No</option>
-        <option value="true">Yes</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form> -->
-  
 
+<h2>Adding</h2>
   <form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="service.formSubmitted" autocomplete="off">
-    <input type="hidden" name="paymentDetailId" [value]="formData.id">
+    <input type="hidden" name="paymentDetailId" [value]="service.t().id">
     <div class="mb-3">
       <label>Name</label>
       <input class="form-control form-control-lg" placeholder="Name on Card" #name="ngModel" name="name"
-        [(ngModel)]="formData.traineeName" required>
+        [(ngModel)]="service.t().traineeName" required>
     </div>
     <div class="mb-3">
       <label>Age</label>
       <input class="form-control form-control-lg" #age="ngModel"
-        name="age" [(ngModel)]="formData.age" required minlength="16" maxlength="16">
+        name="age" type="number" [(ngModel)]="service.t().age" required>
     </div>
   
     <div class="row">
-      <div class="mb-3 col-6">
-        <label>Working</label>
-        <input class="form-control form-control-lg" #working="ngModel"
-          name="working" [(ngModel)]="formData.isWorking" required>
+      <div class="mb-3">
+        <input class="form-check-input" type="checkbox" id="isWorking" name="isWorking" [(ngModel)]="service.t().isWorking">
+        <label class="form-check-label" for="isWorking"> &nbsp; Is Working</label>
       </div>
     </div>
     <div class="d-grid">
@@ -44,5 +24,5 @@
         Submit
       </button>
     </div>
-  
+
   </form>

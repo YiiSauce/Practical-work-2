@@ -6,15 +6,12 @@
 <div class="row mt-5">
     <div class="col-6">
         <app-trainee-details/>
-    <button class="m-1 btn btn-sm btn-success" (click)="add()">Add</button>
     </div>
 
 <div class="container d-flex justify-content-center col-6">
     <ul class="list-group mt-5 text-white">
         @for (t of trainees(); track t.id) {
-        <li class="list-group-item d-flex justify-content-between align-content-center"
-            [ngClass]="{'active': t.id === selectedTrainee()}"
-            (click)="onSelected(t.id)">
+        <li class="list-group-item d-flex justify-content-between align-content-center">
             <div class="d-flex flex-row">
                 <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
                 <div class="ml-3">
