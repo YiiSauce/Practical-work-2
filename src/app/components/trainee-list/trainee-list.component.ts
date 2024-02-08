@@ -37,4 +37,7 @@ export class TraineeListComponent {
   update(trainee: Trainee){
     console.log("I am returning to it !");
   }
+  add(){
+    console.log("I am returning to it !");
+  }
 }

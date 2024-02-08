@@ -13,10 +13,12 @@
             (click)="onSelected(t.id)">
             <div class="d-flex flex-row">
                 <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                <div class="ml-2">
-                    <h6 class="mb-0">{{ t.traineeName }}</h6>
+                <div class="ml-3">
+                    <h6 class="mb-0 heads">{{ t.traineeName }}</h6>
                     <div class="about">
-                        <span>Id N° : {{ t.id}}</span>
+                        <span>Id N° : <b>{{ t.id}}</b></span>
+                        <span>Age : <b>{{ t.age}}</b></span>
+                        <span><b>{{ t.isWorking?"Working...":"in holiday"}}</b></span>
                     </div>
                 </div>
             </div>
@@ -26,7 +28,9 @@
                 <button class="m-1 btn btn-sm btn-danger" (click)="remove(t.id)">Delete</button>
             </div>
         </li>
-        }
+    }
+    
+    <button class="m-1 btn btn-sm btn-success" (click)="add()">Add</button>
     </ul>
 
 </div>

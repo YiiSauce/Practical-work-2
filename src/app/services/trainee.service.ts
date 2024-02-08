@@ -16,10 +16,10 @@ export class TraineeService {
     });
   }
 
-  addBenefit(benefit: Trainee) {
-    this.http.post<Trainee>(`${environment.apiUrl}/Trainees`, benefit)
-      .subscribe((createdBenefit) => {
-        this.trainees.set([...this.trainees(), createdBenefit]);
+  addTrainee(trainee: Trainee) {
+    this.http.post<Trainee>(`${environment.apiUrl}/Trainees`, trainee)
+      .subscribe((createdTrainee) => {
+        this.trainees.set([...this.trainees(), createdTrainee]);
       });
   }
 
@@ -41,5 +41,6 @@ export class TraineeService {
   setSelectedTrainee(id : number){
     this.selectedTrainee.set(id);
   }
+  
 }
 
