@@ -1,21 +1,20 @@
 
 <h2>Adding</h2>
-  <form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="service.formSubmitted" autocomplete="off">
+  <form [formGroup]="myForm" (submit)="onSubmit()" [class.submitted]="service.formSubmitted" autocomplete="off">
     <input type="hidden" name="paymentDetailId" [value]="service.t().id">
     <div class="mb-3">
-      <label>Name</label>
-      <input class="form-control form-control-lg" placeholder="Name on Card" #name="ngModel" name="name"
-        [(ngModel)]="service.t().traineeName" required>
+      <label for="name">Name</label>
+      <input class="form-control form-control-lg" name="name" formControlName="name" required>
     </div>
     <div class="mb-3">
-      <label>Age</label>
-      <input class="form-control form-control-lg" #age="ngModel"
-        name="age" type="number" [(ngModel)]="service.t().age" required>
+      <label for="age">Age</label>
+      <input class="form-control form-control-lg"
+        name="age" type="number" formControlName="age" required>
     </div>
   
     <div class="row">
       <div class="mb-3">
-        <input class="form-check-input" type="checkbox" id="isWorking" name="isWorking" [(ngModel)]="service.t().isWorking">
+        <input class="form-check-input" type="checkbox" id="isWorking" name="isWorking"formControlName="isWorking">
         <label class="form-check-label" for="isWorking"> &nbsp; Is Working</label>
       </div>
     </div>
