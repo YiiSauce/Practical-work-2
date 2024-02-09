@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, EventEmitter, Output, computed } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { NgClass, NgFor } from '@angular/common';
 import { Trainee } from '../../models/trainee';
