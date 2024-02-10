@@ -1,7 +1,7 @@
 
 <h2>Adding</h2>
   <form [formGroup]="myForm" (submit)="onSubmit()" [class.submitted]="service.formSubmitted" autocomplete="off">
-    <input name="paymentDetailId" formControlName="id">
+    <input type="hidden" name="paymentDetailId" formControlName="id">
     <div class="mb-3">
       <label for="name">Name</label>
       <input class="form-control form-control-lg" name="name" formControlName="traineeName" required>
@@ -23,8 +23,4 @@
         Submit
       </button>
     </div>
-    <div>{{first().traineeName}}</div>
-    <div>{{first().age}}</div>
-    <div>{{first().isWorking}}</div>
-
   </form>

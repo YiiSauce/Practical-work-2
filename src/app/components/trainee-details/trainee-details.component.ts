@@ -1,8 +1,7 @@
 import { Component, OnInit, computed, effect, signal } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { Trainee } from '../../models/trainee';
-import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { toSignal } from "@angular/core/rxjs-interop";
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -12,63 +11,49 @@ import { toSignal } from "@angular/core/rxjs-interop";
   templateUrl: './trainee-details.component.html',
   styleUrl: './trainee-details.component.css'
 })
-export class TraineeDetailsComponent implements OnInit{
+export class TraineeDetailsComponent {
   myForm: FormGroup = new FormGroup({
-    id : new FormControl(0),
-    traineeName : new FormControl(""),
-    age : new FormControl(0),
-    isWorking : new FormControl(false)
+    id: new FormControl(this.service.t().id),
+    traineeName: new FormControl(this.service.t().traineeName),
+    age: new FormControl(this.service.t().age),
+    isWorking: new FormControl(this.service.t().isWorking)
   });
 
 
   constructor(public service: TraineeService) {
     effect(() => {
-      this.myForm.patchValue(this.first(),{emitEvent:false});
-    },{allowSignalWrites:true});
+      this.myForm.patchValue(this.service.t(), { emitEvent: false });
+    }, { allowSignalWrites: true });
 
     this.myForm.valueChanges.subscribe((val) =>
-    this.first.set(val ?? ({id:0,traineeName:"",age:0,isWorking:false}))
-  );
+      this.first.set(val ?? ({ id: 0, traineeName: "", age: 0, isWorking: false }))
+    );
   }
 
-  // first = toSignal<Trainee>(this.myForm.valueChanges);
-  //first = computed(() => this.service.t())
-  first = signal<Trainee>(({id:0,traineeName:"",age:0,isWorking:false}));
-  //firstly = computed(() => this.service.t());
-
-  ngOnInit():void{
-  }
+  first = signal<Trainee>(({ id: 0, traineeName: "", age: 0, isWorking: false }));
 
   onSubmit() {
-    //this.service.formSubmitted=true;
     console.log("-------------------------------------------");
-    // this.service.t = signal<Trainee>(this.myForm.value);
-    console.log(this.myForm.value);
+    console.log(this.first());
     console.log("-------------------------------------------");
-    if (this.myForm.valid) {      
-      if(this.first().id == 0){
-        // this.first.set(this.service.t())
-        console.log(this.first());
+    if (this.myForm.valid) {
+      if (this.first().id == 0) {
         this.insertItem(this.first());
       }
-      else{
-        console.log(this.service.t().id);
-        this.updateItem(this.service.t());
-        //this.myForm.reset();
+      else {
+        this.updateItem(this.first());
       }
     } else {
       console.error('Form is invalid.');
     }
-}
-insertItem(form: Trainee){
-  this.service.addTrainee(form);
-  this.first.set({id:0,traineeName:"",age:0,isWorking:false});
-  // this.service.t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
-  // this.service.formSubmitted = false;
-}
-updateItem(form: Trainee){
-  this.service.updateTrainee(form);
-  this.service.t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
-  //this.service.formSubmitted = false;
-}
+  }
+
+  insertItem(form: Trainee) {
+    this.service.addTrainee(form);
+    this.service.t.set({ id: 0, traineeName: "", age: 0, isWorking: false })
+  }
+  updateItem(form: Trainee) {
+    this.service.updateTrainee(form);
+    this.service.t.set({ id: 0, traineeName: "", age: 0, isWorking: false })
+  }
 }
