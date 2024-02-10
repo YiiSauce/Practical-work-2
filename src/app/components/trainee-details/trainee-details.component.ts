@@ -21,7 +21,7 @@ export class TraineeDetailsComponent implements OnInit{
   });
 
 
-  constructor( private formBuilder: FormBuilder ,public service: TraineeService) {
+  constructor(public service: TraineeService) {
     effect(() => {
       this.myForm.patchValue(this.first(),{emitEvent:false});
     },{allowSignalWrites:true});
@@ -62,8 +62,9 @@ export class TraineeDetailsComponent implements OnInit{
 }
 insertItem(form: Trainee){
   this.service.addTrainee(form);
-  //this.first.set({id:0,traineeName:"",age:0,isWorking:false});
-  //this.service.formSubmitted = false;
+  this.first.set({id:0,traineeName:"",age:0,isWorking:false});
+  // this.service.t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
+  // this.service.formSubmitted = false;
 }
 updateItem(form: Trainee){
   this.service.updateTrainee(form);
