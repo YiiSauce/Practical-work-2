@@ -11,9 +11,7 @@ export class TraineeService {
 
   private trainees$ = this.http.get<Trainee[]>(`${environment.apiUrl}/Trainees`);
   trainees : WritableSignal<Trainee[]> = signal([]);
-  formSubmitted:boolean = false;
   t = signal<Trainee>({id:0,traineeName:"",age:0,isWorking:false});
-  // OnePerson: WritableSignal<Person> = signal({ id: 0, name: '', age: 0 });
 
   constructor(private http: HttpClient) { 
     this.trainees$.subscribe((ts) =>{
@@ -40,11 +38,6 @@ export class TraineeService {
       .subscribe(() => {
         this.trainees.set(this.trainees().map(trainee => (trainee.id === updatedTrainee.id) ? updatedTrainee : trainee));
       });
-  }
-  getById(id: number) {
-    this.http.get<Trainee>(`${environment.apiUrl}/Trainees/${id}`).subscribe((trainee) => {
-      this.t.set(trainee)
-    });
   }
 
 }

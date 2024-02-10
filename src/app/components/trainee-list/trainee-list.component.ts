@@ -16,7 +16,6 @@ export class TraineeListComponent {
   errMsg = "";
   
   constructor(private traineeService:TraineeService){
-    console.log(this.traineeService.trainees())
   }
   trainees = computed(() => {
     try{
@@ -26,7 +25,6 @@ export class TraineeListComponent {
       return[];
     }
   });
-
  
   remove(id:number){
     this.traineeService.deleteTrainee(id);

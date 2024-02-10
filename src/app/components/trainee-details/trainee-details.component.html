@@ -1,26 +1,33 @@
-
 <h2>Adding</h2>
-  <form [formGroup]="myForm" (submit)="onSubmit()" [class.submitted]="service.formSubmitted" autocomplete="off">
-    <input type="hidden" name="paymentDetailId" formControlName="id">
+<form [formGroup]="myForm" (submit)="onSubmit()" autocomplete="off">
+  <input type="hidden" name="paymentDetailId" formControlName="id">
+  <div class="mb-3">
+    <label for="name">Name</label>
+    <input class="form-control form-control-lg" name="name" formControlName="traineeName" required>
+    <div class="text-danger" *ngIf="myForm.controls['traineeName']?.touched">
+      <span *ngIf="myForm.controls['traineeName'].errors?.['required']">Enter a valid name !!</span>
+      <span *ngIf="myForm.controls['traineeName'].errors?.['minlength']">Name must be longer than 5 characters</span>
+      <span *ngIf="myForm.controls['traineeName'].errors?.['maxlength']">Name must not exceed 100 characters</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="age">Age</label>
+    <input class="form-control form-control-lg" name="age" type="number" formControlName="age" required>
+    <div class="text-danger" *ngIf="myForm.controls['age']?.touched">
+    <span *ngIf="myForm.controls['age'].errors?.['required']">Enter a valid Age !!</span>
+    <span *ngIf="myForm.controls['age'].errors?.['min']">the trainee must be an adult</span>
+  </div>
+  </div>
+
+  <div class="row">
     <div class="mb-3">
-      <label for="name">Name</label>
-      <input class="form-control form-control-lg" name="name" formControlName="traineeName" required>
+      <input class="form-check-input" type="checkbox" id="isWorking" name="isWorking" formControlName="isWorking">
+      <label class="form-check-label" for="isWorking"> &nbsp; Is Working</label>
     </div>
-    <div class="mb-3">
-      <label for="age">Age</label>
-      <input class="form-control form-control-lg"
-        name="age" type="number" formControlName="age" required>
-    </div>
-  
-    <div class="row">
-      <div class="mb-3">
-        <input class="form-check-input" type="checkbox" id="isWorking" name="isWorking"formControlName="isWorking">
-        <label class="form-check-label" for="isWorking"> &nbsp; Is Working</label>
-      </div>
-    </div>
-    <div class="d-grid">
-      <button class="btn btn-lg btn-success" type="submit">
-        Submit
-      </button>
-    </div>
-  </form>
+  </div>
+  <div class="d-grid">
+    <button class="btn btn-lg btn-success" type="submit">
+      Submit
+    </button>
+  </div>
+</form>
