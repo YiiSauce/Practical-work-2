@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, effect, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { Trainee } from '../../models/trainee';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -46,7 +46,6 @@ export class TraineeDetailsComponent {
     } else {
       console.error('Form is invalid.');
     }
-    
   }
 
   insertItem(form: Trainee) {
