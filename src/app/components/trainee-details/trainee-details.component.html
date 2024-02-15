@@ -4,6 +4,7 @@
   <div class="mb-3">
     <label for="name">Name</label>
     <input class="form-control form-control-lg" name="name" formControlName="traineeName" required>
+    
     <div class="text-danger" *ngIf="myForm.controls['traineeName']?.touched">
       <span *ngIf="myForm.controls['traineeName'].errors?.['required']">Enter a valid name !!</span>
       <span *ngIf="myForm.controls['traineeName'].errors?.['minlength']">Name must be longer than 5 characters</span>

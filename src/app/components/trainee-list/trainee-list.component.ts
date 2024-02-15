@@ -3,6 +3,7 @@ import { TraineeService } from '../../services/trainee.service';
 import { NgClass, NgFor } from '@angular/common';
 import { Trainee } from '../../models/trainee';
 import { TraineeDetailsComponent } from '../trainee-details/trainee-details.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-trainee-list',
@@ -15,7 +16,7 @@ export class TraineeListComponent {
   pageTitle="test";
   errMsg = "";
   
-  constructor(private traineeService:TraineeService){
+  constructor(private traineeService:TraineeService, private toastr: ToastrService){
   }
   trainees = computed(() => {
     try{
@@ -28,6 +29,7 @@ export class TraineeListComponent {
  
   remove(id:number){
     this.traineeService.deleteTrainee(id);
+    this.toastr.error("Deleted Successfuly!", "Trainee Deleted");
   }
 
   update(trainee: Trainee){
